@@ -30,8 +30,9 @@ public class SelamBusReservationSystem extends Application {
     public static void main(String[] args) {
 
         try {
-            Connection conn = DatabaseConnection.getConnection();
-            if (conn != null) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DatabaseConnection.getConnection();
+            if (con != null) {
                 System.out.println("✅ Database is working!");
             }
         } catch (Exception e) {
