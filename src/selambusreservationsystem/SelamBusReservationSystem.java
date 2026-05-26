@@ -6,6 +6,8 @@ package selambusreservationsystem;
 
 import java.sql.Connection;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -14,17 +16,15 @@ import javafx.stage.Stage;
 public class SelamBusReservationSystem extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
 
-        Label label = new Label("🚍 Selam Bus System Running!");
-
-        StackPane root = new StackPane(label);
-
-        Scene scene = new Scene(root, 400, 200);
-
+//        Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UI.fxml"));
+        Parent root = loader.load();
         stage.setTitle("Selam Bus Reservation System");
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
+
     }
 
     public static void main(String[] args) {
