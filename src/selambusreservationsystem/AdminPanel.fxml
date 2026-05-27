@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="662.0"
@@ -22,6 +15,7 @@
 
     <children>
 
+        <!-- Background -->
         <ImageView fitHeight="662.0"
                    fitWidth="912.0"
                    pickOnBounds="true"
@@ -33,141 +27,124 @@
 
         </ImageView>
 
-        <Pane layoutX="35.0"
-              layoutY="25.0"
-              prefHeight="610.0"
-              prefWidth="840.0"
-              styleClass="main-pane">
+        <!-- MAIN GLASS PANEL -->
+        <Pane layoutX="30.0"
+              layoutY="20.0"
+              prefHeight="620.0"
+              prefWidth="850.0"
+              style="
+                -fx-background-color: rgba(255,255,255,0.85);
+                -fx-background-radius: 15;
+                -fx-border-radius: 15;
+                -fx-border-color: #2c3e50;
+              ">
 
             <children>
 
-                <Label alignment="CENTER"
-                       layoutY="25.0"
-                       prefWidth="840.0"
+                <!-- TITLE -->
+                <Label layoutX="260.0"
+                       layoutY="10.0"
                        text="Selam Bus Admin Panel">
-
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="26.0"/>
                     </font>
-
                 </Label>
 
-                <Label layoutX="40.0"
-                       layoutY="100.0"
-                       text="Origin"/>
+                <!-- SUCCESS MESSAGE -->
+                <Label fx:id="lblStatus"
+                       layoutX="250.0"
+                       layoutY="45.0"
+                       textFill="green"
+                       text=""/>
+
+                <!-- ================= BUS ================= -->
+
+                <Label layoutX="40.0" layoutY="90.0" text="Bus Name"/>
+                <TextField fx:id="txtBusName"
+                           layoutX="40.0"
+                           layoutY="115.0"
+                           prefWidth="180.0"/>
+
+                <Label layoutX="250.0" layoutY="90.0" text="Seats"/>
+                <TextField fx:id="txtTotalSeats"
+                           layoutX="250.0"
+                           layoutY="115.0"
+                           prefWidth="120.0"/>
+
+                <Button fx:id="btnAddBus"
+                        layoutX="400.0"
+                        layoutY="115.0"
+                        text="Add Bus"
+                        onAction="#addBus"/>
+
+                <!-- ================= TRIP ================= -->
 
                 <ComboBox fx:id="cmbOrigin"
                           layoutX="40.0"
-                          layoutY="125.0"
-                          prefHeight="38.0"
-                          prefWidth="160.0"
-                          promptText="Select Origin"/>
-
-                <Label layoutX="240.0"
-                       layoutY="100.0"
-                       text="Destination"/>
+                          layoutY="190.0"
+                          prefWidth="140.0"
+                          promptText="Origin"/>
 
                 <ComboBox fx:id="cmbDestination"
-                          layoutX="240.0"
-                          layoutY="125.0"
-                          prefHeight="38.0"
-                          prefWidth="160.0"
-                          promptText="Select Destination"/>
-
-                <Label layoutX="440.0"
-                       layoutY="100.0"
-                       text="Departure Date"/>
+                          layoutX="200.0"
+                          layoutY="190.0"
+                          prefWidth="140.0"
+                          promptText="Destination"/>
 
                 <DatePicker fx:id="dateDeparture"
-                            layoutX="440.0"
-                            layoutY="125.0"
-                            prefHeight="38.0"
-                            prefWidth="160.0"/>
-
-                <Label layoutX="640.0"
-                       layoutY="100.0"
-                       text="Departure Time"/>
+                            layoutX="360.0"
+                            layoutY="190.0"
+                            prefWidth="140.0"/>
 
                 <TextField fx:id="txtTime"
-                           layoutX="640.0"
-                           layoutY="125.0"
-                           prefHeight="38.0"
-                           prefWidth="160.0"
-                           promptText="08:00 AM"/>
-
-                <Label layoutX="180.0"
-                       layoutY="200.0"
-                       text="Price"/>
+                           layoutX="520.0"
+                           layoutY="190.0"
+                           prefWidth="120.0"
+                           promptText="Time"/>
 
                 <TextField fx:id="txtPrice"
-                           layoutX="180.0"
-                           layoutY="225.0"
-                           prefHeight="38.0"
-                           prefWidth="160.0"
-                           promptText="350"/>
+                           layoutX="660.0"
+                           layoutY="190.0"
+                           prefWidth="120.0"
+                           promptText="Price"/>
 
-                <Button fx:id="btnAdd"
-                        layoutX="390.0"
-                        layoutY="225.0"
-                        mnemonicParsing="false"
-                        onAction="#addTrip"
-                        prefHeight="40.0"
-                        prefWidth="100.0"
-                        styleClass="add-button"
-                        text="Add Trip"/>
+                <ComboBox fx:id="cmbBus"
+                          layoutX="40.0"
+                          layoutY="240.0"
+                          prefWidth="200.0"
+                          promptText="Select Bus"/>
 
-                <Button fx:id="btnUpdate"
-                        layoutX="510.0"
-                        layoutY="225.0"
-                        mnemonicParsing="false"
-                        onAction="#updateTrip"
-                        prefHeight="40.0"
-                        prefWidth="100.0"
-                        styleClass="update-button"
-                        text="Update"/>
+                <!-- BUTTONS -->
+                <Button layoutX="270.0"
+                        layoutY="240.0"
+                        text="Add"
+                        onAction="#addTrip"/>
 
-                <Button fx:id="btnDelete"
-                        layoutX="630.0"
-                        layoutY="225.0"
-                        mnemonicParsing="false"
-                        onAction="#deleteTrip"
-                        prefHeight="40.0"
-                        prefWidth="100.0"
-                        styleClass="delete-button"
-                        text="Delete"/>
+                <Button layoutX="340.0"
+                        layoutY="240.0"
+                        text="Update"
+                        onAction="#updateTrip"/>
 
+                <Button layoutX="430.0"
+                        layoutY="240.0"
+                        text="Delete"
+                        onAction="#deleteTrip"/>
+
+                <!-- TABLE AREA -->
                 <TableView fx:id="tripTable"
                            layoutX="40.0"
-                           layoutY="330.0"
-                           prefHeight="230.0"
-                           prefWidth="760.0">
+                           layoutY="320.0"
+                           prefWidth="770.0"
+                           prefHeight="260.0">
 
                     <columns>
-
-                        <TableColumn fx:id="colTripId"
-                                     prefWidth="70.0"
-                                     text="ID"/>
-
-                        <TableColumn fx:id="colOrigin"
-                                     prefWidth="140.0"
-                                     text="Origin"/>
-
-                        <TableColumn fx:id="colDestination"
-                                     prefWidth="140.0"
-                                     text="Destination"/>
-
-                        <TableColumn fx:id="colDate"
-                                     prefWidth="150.0"
-                                     text="Date"/>
-
-                        <TableColumn fx:id="colTime"
-                                     prefWidth="150.0"
-                                     text="Time"/>
-
-                        <TableColumn fx:id="colPrice"
-                                     prefWidth="100.0"
-                                     text="Price"/>
-
+                        <TableColumn fx:id="colTripId" text="ID"/>
+                        <TableColumn fx:id="colOrigin" text="From"/>
+                        <TableColumn fx:id="colDestination" text="To"/>
+                        <TableColumn fx:id="colDate" text="Date"/>
+                        <TableColumn fx:id="colTime" text="Time"/>
+                        <TableColumn fx:id="colPrice" text="Price"/>
+                        <TableColumn fx:id="colBus" text="Bus"/>
                     </columns>
 
                 </TableView>

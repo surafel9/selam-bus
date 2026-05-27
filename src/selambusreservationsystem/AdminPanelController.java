@@ -9,11 +9,13 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class AdminPanelController implements Initializable {
 
+    
     @FXML
     private ComboBox<String> cmbOrigin;
 
@@ -30,9 +32,19 @@ public class AdminPanelController implements Initializable {
     private TextField txtPrice;
 
     @FXML
+    private TextField txtBusName;
+
+    @FXML
+    private TextField txtTotalSeats;
+
+    @FXML
     private TableView<?> tripTable;
 
-    private String[] locations = {
+    @FXML
+    private Label lblStatus;
+
+    
+    private final String[] locations = {
         "Addis Ababa",
         "Adama",
         "Hawassa",
@@ -59,40 +71,79 @@ public class AdminPanelController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        cmbOrigin.getItems().addAll(locations);
-        cmbDestination.getItems().addAll(locations);
+        if (cmbOrigin != null) {
+            cmbOrigin.getItems().addAll(locations);
+        }
 
+        if (cmbDestination != null) {
+            cmbDestination.getItems().addAll(locations);
+        }
+
+        lblStatus.setText("");
     }
 
+    
+    @FXML
+    public void addBus(ActionEvent event) {
+
+        String busName = txtBusName.getText();
+        String seats = txtTotalSeats.getText();
+
+        if (busName == null || busName.isEmpty() || seats == null || seats.isEmpty()) {
+            lblStatus.setText("Please fill all bus fields");
+            return;
+        }
+
+        try {
+            int totalSeats = Integer.parseInt(seats);
+
+            // future DB insert here
+            lblStatus.setText("Bus added successfully");
+
+            txtBusName.clear();
+            txtTotalSeats.clear();
+
+        } catch (NumberFormatException e) {
+            lblStatus.setText("Seats must be a number");
+        }
+    }
+
+   
     @FXML
     public void addTrip(ActionEvent event) {
 
-        String origin = cmbOrigin.getValue();
-        String destination = cmbDestination.getValue();
-        String date = String.valueOf(dateDeparture.getValue());
-        String time = txtTime.getText();
-        String price = txtPrice.getText();
+        if (cmbOrigin.getValue() == null ||
+            cmbDestination.getValue() == null ||
+            dateDeparture.getValue() == null ||
+            txtTime.getText().isEmpty() ||
+            txtPrice.getText().isEmpty()) {
 
-        System.out.println("Trip Added");
-        System.out.println(origin);
-        System.out.println(destination);
-        System.out.println(date);
-        System.out.println(time);
-        System.out.println(price);
+            lblStatus.setText("Please fill all trip fields");
+            return;
+        }
 
+        if (cmbOrigin.getValue().equals(cmbDestination.getValue())) {
+            lblStatus.setText("Origin and destination cannot be same");
+            return;
+        }
+
+        
+        lblStatus.setText("Trip added successfully");
+
+        txtTime.clear();
+        txtPrice.clear();
+        dateDeparture.setValue(null);
     }
 
+    
     @FXML
     public void updateTrip(ActionEvent event) {
-
-        System.out.println("Update Trip clicked");
-
+        lblStatus.setText("Trip updated successfully (TODO DB)");
     }
 
+   
     @FXML
     public void deleteTrip(ActionEvent event) {
-
-        System.out.println("Delete Trip clicked");
-
+        lblStatus.setText("Trip deleted successfully (TODO DB)");
     }
 }
