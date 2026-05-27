@@ -4,13 +4,15 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="662.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane prefHeight="947.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="selambusreservationsystem.UIController">
     <children>
         <ImageView fx:id="img" fitHeight="608.0" fitWidth="856.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true"
@@ -19,22 +21,11 @@
                 <Image url="@resources/bus.png"/>
             </image>
         </ImageView>
-        <Button fx:id="btnAdmin"
-                layoutX="20.0"
-                layoutY="20.0"
-                prefWidth="70.0"
-                prefHeight="25.0"
-                text="Admin"
-                onAction="#openAdminPanel"
-                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 10;"/>
+        <Button fx:id="btnAdmin" layoutX="20.0" layoutY="20.0" onAction="#openAdminPanel" prefHeight="25.0"
+                prefWidth="70.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 10;"
+                text="Admin"/>
         <Pane blendMode="SRC_ATOP" layoutX="467.0" layoutY="191.0" prefHeight="281.0" prefWidth="385.0"
-              style="
-              -fx-background-color:
-              rgba(255,255,255,0.7);
-              -fx-border-color: #2c3e50;
-              -fx-border-radius: 10;
-              -fx-background-radius: 10;"
-        >
+              style="               -fx-background-color:               rgba(255,255,255,0.7);               -fx-border-color: #2c3e50;               -fx-border-radius: 10;               -fx-background-radius: 10;">
             <children>
                 <Label fx:id="lblSearch" alignment="CENTER" layoutX="-1.0" layoutY="50.0" prefHeight="23.0"
                        prefWidth="385.0" text="Search" textAlignment="CENTER">
@@ -52,5 +43,20 @@
                           style=" -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 5; "/>
             </children>
         </Pane>
+        <TableView fx:id="tripTable" layoutX="36.0" layoutY="656.0" prefHeight="250.0" prefWidth="840.0">
+
+            <columns>
+
+                <TableColumn fx:id="colOrigin" prefWidth="120" text="From"/>
+                <TableColumn fx:id="colDestination" prefWidth="120" text="To"/>
+                <TableColumn fx:id="colDate" prefWidth="120" text="Date"/>
+                <TableColumn fx:id="colTime" prefWidth="120" text="Time"/>
+                <TableColumn fx:id="colPrice" prefWidth="100" text="Price"/>
+                <TableColumn fx:id="colBus" prefWidth="120" text="Bus"/>
+                <TableColumn fx:id="colAction" text="Action"/>
+
+            </columns>
+
+        </TableView>
     </children>
 </AnchorPane>
