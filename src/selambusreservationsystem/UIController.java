@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import java.time.LocalDate;
 
 public class UIController {
+
     @FXML
     private Label lblSearch;
     @FXML
@@ -19,28 +20,27 @@ public class UIController {
     private ComboBox<String> to;
 
     private String[] locations = {
-            "Addis Ababa",
-            "Adama",
-            "Hawassa",
-            "Bahir Dar",
-            "Mekelle",
-            "Dire Dawa",
-            "Gondar",
-            "Jimma",
-            "Harar",
-            "Dessie",
-            "Debre Birhan",
-            "Debre Markos",
-            "Shashamane",
-            "Arba Minch",
-            "Assosa",
-            "Nekemte",
-            "Wolaita Sodo",
-            "Jijiga",
-            "Gambela",
-            "Axum",
-            "Lalibela",
-    };
+        "Addis Ababa",
+        "Adama",
+        "Hawassa",
+        "Bahir Dar",
+        "Mekelle",
+        "Dire Dawa",
+        "Gondar",
+        "Jimma",
+        "Harar",
+        "Dessie",
+        "Debre Birhan",
+        "Debre Markos",
+        "Shashamane",
+        "Arba Minch",
+        "Assosa",
+        "Nekemte",
+        "Wolaita Sodo",
+        "Jijiga",
+        "Gambela",
+        "Axum",
+        "Lalibela",};
 
     public void getDate(ActionEvent event) {
         LocalDate selectedDate = datePicker.getValue();
@@ -68,6 +68,38 @@ public class UIController {
     public void initialize() {
         from.getItems().addAll(locations);
         to.getItems().addAll(locations);
+    }
+
+    @FXML
+    public void openAdminPanel(javafx.event.ActionEvent event) {
+
+        try {
+
+            javafx.fxml.FXMLLoader loader
+                    = new javafx.fxml.FXMLLoader(getClass().getResource("AdminPanel.fxml"));
+
+            javafx.scene.Parent root = loader.load();
+
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+
+            javafx.scene.Scene scene
+                    = new javafx.scene.Scene(root);
+
+            stage.setTitle("Admin Panel");
+
+            stage.setScene(scene);
+
+            stage.setWidth(912);
+            stage.setHeight(662);
+
+            stage.setMinWidth(912);
+            stage.setMinHeight(662);
+
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
