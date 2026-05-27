@@ -15,7 +15,6 @@
 
     <children>
 
-        <!-- Background -->
         <ImageView fitHeight="662.0"
                    fitWidth="912.0"
                    pickOnBounds="true"
@@ -27,7 +26,6 @@
 
         </ImageView>
 
-        <!-- MAIN GLASS PANEL -->
         <Pane layoutX="30.0"
               layoutY="20.0"
               prefHeight="620.0"
@@ -50,15 +48,14 @@
                     </font>
                 </Label>
 
-                <!-- SUCCESS MESSAGE -->
+                <!-- STATUS -->
                 <Label fx:id="lblStatus"
                        layoutX="250.0"
                        layoutY="45.0"
                        textFill="green"
                        text=""/>
 
-                <!-- ================= BUS ================= -->
-
+                <!-- BUS SECTION -->
                 <Label layoutX="40.0" layoutY="90.0" text="Bus Name"/>
                 <TextField fx:id="txtBusName"
                            layoutX="40.0"
@@ -77,7 +74,7 @@
                         text="Add Bus"
                         onAction="#addBus"/>
 
-                <!-- ================= TRIP ================= -->
+                <!-- TRIP SECTION -->
 
                 <ComboBox fx:id="cmbOrigin"
                           layoutX="40.0"
@@ -114,7 +111,7 @@
                           prefWidth="200.0"
                           promptText="Select Bus"/>
 
-                <!-- BUTTONS -->
+                <!-- ACTION BUTTONS -->
                 <Button layoutX="270.0"
                         layoutY="240.0"
                         text="Add"
@@ -130,7 +127,7 @@
                         text="Delete"
                         onAction="#deleteTrip"/>
 
-                <!-- TABLE AREA -->
+                <!-- TABLE -->
                 <TableView fx:id="tripTable"
                            layoutX="40.0"
                            layoutY="320.0"
