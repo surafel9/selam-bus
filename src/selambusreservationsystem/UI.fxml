@@ -19,6 +19,14 @@
                 <Image url="@resources/bus.png"/>
             </image>
         </ImageView>
+        <Button fx:id="btnAdmin"
+                layoutX="20.0"
+                layoutY="20.0"
+                prefWidth="70.0"
+                prefHeight="25.0"
+                text="Admin"
+                onAction="#openAdminPanel"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 10;"/>
         <Pane blendMode="SRC_ATOP" layoutX="467.0" layoutY="191.0" prefHeight="281.0" prefWidth="385.0"
               style="
               -fx-background-color:

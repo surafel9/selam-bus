@@ -1,14 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selambusreservationsystem.AdminPanelController">
-    <stylesheets>
-        <URL value="@adminpanel.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="662.0"
+            prefWidth="912.0"
+            stylesheets="@adminpanel.css"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="selambusreservationsystem.AdminPanelController">
+
+    <children>
+
+        <ImageView fitHeight="662.0"
+                   fitWidth="912.0"
+                   pickOnBounds="true"
+                   preserveRatio="false">
+
+            <image>
+                <Image url="@resources/bus.png"/>
+            </image>
+
+        </ImageView>
+
+        <Pane layoutX="35.0"
+              layoutY="25.0"
+              prefHeight="610.0"
+              prefWidth="840.0"
+              styleClass="main-pane">
+
+            <children>
+
+                <Label alignment="CENTER"
+                       layoutY="25.0"
+                       prefWidth="840.0"
+                       text="Selam Bus Admin Panel">
+
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+
+                </Label>
+
+                <Label layoutX="40.0"
+                       layoutY="100.0"
+                       text="Origin"/>
+
+                <ComboBox fx:id="cmbOrigin"
+                          layoutX="40.0"
+                          layoutY="125.0"
+                          prefHeight="38.0"
+                          prefWidth="160.0"
+                          promptText="Select Origin"/>
+
+                <Label layoutX="240.0"
+                       layoutY="100.0"
+                       text="Destination"/>
+
+                <ComboBox fx:id="cmbDestination"
+                          layoutX="240.0"
+                          layoutY="125.0"
+                          prefHeight="38.0"
+                          prefWidth="160.0"
+                          promptText="Select Destination"/>
+
+                <Label layoutX="440.0"
+                       layoutY="100.0"
+                       text="Departure Date"/>
+
+                <DatePicker fx:id="dateDeparture"
+                            layoutX="440.0"
+                            layoutY="125.0"
+                            prefHeight="38.0"
+                            prefWidth="160.0"/>
+
+                <Label layoutX="640.0"
+                       layoutY="100.0"
+                       text="Departure Time"/>
+
+                <TextField fx:id="txtTime"
+                           layoutX="640.0"
+                           layoutY="125.0"
+                           prefHeight="38.0"
+                           prefWidth="160.0"
+                           promptText="08:00 AM"/>
+
+                <Label layoutX="180.0"
+                       layoutY="200.0"
+                       text="Price"/>
+
+                <TextField fx:id="txtPrice"
+                           layoutX="180.0"
+                           layoutY="225.0"
+                           prefHeight="38.0"
+                           prefWidth="160.0"
+                           promptText="350"/>
+
+                <Button fx:id="btnAdd"
+                        layoutX="390.0"
+                        layoutY="225.0"
+                        mnemonicParsing="false"
+                        onAction="#addTrip"
+                        prefHeight="40.0"
+                        prefWidth="100.0"
+                        styleClass="add-button"
+                        text="Add Trip"/>
+
+                <Button fx:id="btnUpdate"
+                        layoutX="510.0"
+                        layoutY="225.0"
+                        mnemonicParsing="false"
+                        onAction="#updateTrip"
+                        prefHeight="40.0"
+                        prefWidth="100.0"
+                        styleClass="update-button"
+                        text="Update"/>
+
+                <Button fx:id="btnDelete"
+                        layoutX="630.0"
+                        layoutY="225.0"
+                        mnemonicParsing="false"
+                        onAction="#deleteTrip"
+                        prefHeight="40.0"
+                        prefWidth="100.0"
+                        styleClass="delete-button"
+                        text="Delete"/>
+
+                <TableView fx:id="tripTable"
+                           layoutX="40.0"
+                           layoutY="330.0"
+                           prefHeight="230.0"
+                           prefWidth="760.0">
+
+                    <columns>
+
+                        <TableColumn fx:id="colTripId"
+                                     prefWidth="70.0"
+                                     text="ID"/>
+
+                        <TableColumn fx:id="colOrigin"
+                                     prefWidth="140.0"
+                                     text="Origin"/>
+
+                        <TableColumn fx:id="colDestination"
+                                     prefWidth="140.0"
+                                     text="Destination"/>
+
+                        <TableColumn fx:id="colDate"
+                                     prefWidth="150.0"
+                                     text="Date"/>
+
+                        <TableColumn fx:id="colTime"
+                                     prefWidth="150.0"
+                                     text="Time"/>
+
+                        <TableColumn fx:id="colPrice"
+                                     prefWidth="100.0"
+                                     text="Price"/>
+
+                    </columns>
+
+                </TableView>
+
+            </children>
+
+        </Pane>
+
+    </children>
+
 </AnchorPane>
