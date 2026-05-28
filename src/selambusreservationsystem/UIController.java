@@ -216,10 +216,10 @@ public class UIController {
             stage.setTitle("Admin Panel");
             stage.setScene(scene);
 
-            stage.setMinWidth(1100);
+            stage.setMinWidth(1000);
             stage.setMinHeight(750);
 
-            stage.setMaxWidth(1500);
+            stage.setMaxWidth(1080);
             stage.setMaxHeight(950);
 
             stage.centerOnScreen();

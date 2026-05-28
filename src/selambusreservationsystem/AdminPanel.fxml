@@ -7,111 +7,107 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1050.0" prefWidth="1400.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="selambusreservationsystem.AdminPanelController">
+<AnchorPane prefHeight="850.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selambusreservationsystem.AdminPanelController">
 
     <children>
 
-        <ImageView fitHeight="1050.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="false">
-            <image>
-                <Image url="@resources/bus.png"/>
-            </image>
-        </ImageView>
-
-        <Pane AnchorPane.topAnchor="20.0"
-              AnchorPane.leftAnchor="20.0"
-              AnchorPane.rightAnchor="20.0"
-              AnchorPane.bottomAnchor="20.0"
-              style="-fx-background-color: rgba(255,255,255,0.88); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #2c3e50;">
+        <Pane style="-fx-background-color: rgba(255,255,255,0.88); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #2c3e50;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
 
             <children>
 
-                <Label layoutX="0" layoutY="10" prefWidth="1360" alignment="CENTER" text="Admin Panel">
+                <Label alignment="CENTER" layoutX="40.0" layoutY="9.0" prefHeight="33.0" prefWidth="946.0" text="Admin Panel">
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
 
-                <Label fx:id="lblStatus" layoutX="560.0" layoutY="55.0" textFill="green"/>
+                <Label fx:id="lblStatus" layoutX="20.0" layoutY="20.0" textFill="green" />
+                <Button layoutX="466.0" layoutY="555.0" onAction="#refreshBookings" text="Refresh Bookings" />
 
-                <Label layoutX="40.0" layoutY="100.0" text="Bus Name"/>
-                <TextField fx:id="txtBusName" layoutX="40.0" layoutY="125.0" prefWidth="180.0"/>
-
-                <Label layoutX="240.0" layoutY="100.0" text="Seats"/>
-                <TextField fx:id="txtTotalSeats" layoutX="240.0" layoutY="125.0" prefWidth="120.0"/>
-
-                <Button layoutX="390.0" layoutY="125.0" text="Add Bus" onAction="#addBus"/>
-
-                <Label layoutX="40.0" layoutY="175.0" text="Origin"/>
-                <ComboBox fx:id="cmbOrigin" layoutX="40.0" layoutY="200.0" prefWidth="150.0"/>
-
-                <Label layoutX="210.0" layoutY="175.0" text="Destination"/>
-                <ComboBox fx:id="cmbDestination" layoutX="210.0" layoutY="200.0" prefWidth="150.0"/>
-
-                <Label layoutX="380.0" layoutY="175.0" text="Bus"/>
-                <ComboBox fx:id="cmbBus" layoutX="380.0" layoutY="200.0" prefWidth="180.0"/>
-
-                <Label layoutX="590.0" layoutY="175.0" text="Trip Details">
-                    <font>
-                        <Font name="System Bold" size="16.0"/>
-                    </font>
-                </Label>
-
-                <DatePicker fx:id="dateDeparture" layoutX="590.0" layoutY="200.0" prefWidth="140.0"/>
-                <TextField fx:id="txtTime" layoutX="750.0" layoutY="200.0" prefWidth="120.0" promptText="Time"/>
-                <TextField fx:id="txtPrice" layoutX="890.0" layoutY="200.0" prefWidth="120.0" promptText="Price"/>
-
-                <Button layoutX="40.0" layoutY="260.0" text="Add Trip" onAction="#addTrip"/>
-                <Button layoutX="140.0" layoutY="260.0" text="Update Trip" onAction="#updateTrip"/>
-                <Button layoutX="260.0" layoutY="260.0" text="Delete Trip" onAction="#deleteTrip"/>
-                <Button layoutX="400.0" layoutY="260.0" text="Refresh Bookings" onAction="#refreshBookings"/>
-
-                <TableView fx:id="tripTable"
-                           layoutX="20.0"
-                           layoutY="330.0"
-                           AnchorPane.leftAnchor="20.0"
-                           AnchorPane.rightAnchor="20.0"
-                           prefHeight="320.0">
+                <TableView fx:id="tripTable" layoutX="20.0" layoutY="330.0" prefHeight="220.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
 
                     <columns>
-                        <TableColumn fx:id="colTripId" text="ID" prefWidth="80"/>
-                        <TableColumn fx:id="colOrigin" text="From" prefWidth="160"/>
-                        <TableColumn fx:id="colDestination" text="To" prefWidth="160"/>
-                        <TableColumn fx:id="colDate" text="Date" prefWidth="160"/>
-                        <TableColumn fx:id="colTime" text="Time" prefWidth="140"/>
-                        <TableColumn fx:id="colPrice" text="Price" prefWidth="140"/>
-                        <TableColumn fx:id="colBus" text="Bus" prefWidth="160"/>
+                        <TableColumn fx:id="colTripId" prefWidth="80" text="ID" />
+                        <TableColumn fx:id="colOrigin" prefWidth="160" text="From" />
+                        <TableColumn fx:id="colDestination" prefWidth="160" text="To" />
+                        <TableColumn fx:id="colDate" prefWidth="160" text="Date" />
+                        <TableColumn fx:id="colTime" prefWidth="140" text="Time" />
+                        <TableColumn fx:id="colPrice" prefWidth="140" text="Price" />
+                        <TableColumn fx:id="colBus" prefWidth="160" text="Bus" />
                     </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
                 </TableView>
 
-                <TableView fx:id="bookingTable"
-                           layoutX="20.0"
-                           layoutY="680.0"
-                           AnchorPane.leftAnchor="20.0"
-                           AnchorPane.rightAnchor="20.0"
-                           AnchorPane.bottomAnchor="20.0"
-                           prefHeight="320.0">
+                <TableView fx:id="bookingTable" layoutX="20.0" layoutY="586.0" prefHeight="220.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="28.0">
 
                     <columns>
-                        <TableColumn fx:id="colBookingId" text="ID" prefWidth="80"/>
-                        <TableColumn fx:id="colPassenger" text="Passenger" prefWidth="160"/>
-                        <TableColumn fx:id="colBusName" text="Bus" prefWidth="140"/>
-                        <TableColumn fx:id="colOriginB" text="From" prefWidth="140"/>
-                        <TableColumn fx:id="colDestinationB" text="To" prefWidth="140"/>
-                        <TableColumn fx:id="colDateB" text="Date" prefWidth="140"/>
-                        <TableColumn fx:id="colSeat" text="Seat" prefWidth="120"/>
-                        <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                        <TableColumn fx:id="colBookingId" prefWidth="80" text="ID" />
+                        <TableColumn fx:id="colPassenger" prefWidth="180" text="Passenger" />
+                        <TableColumn fx:id="colBusName" prefWidth="180" text="Bus" />
+                        <TableColumn fx:id="colOriginB" prefWidth="140.0" text="From" />
+                        <TableColumn fx:id="colDestinationB" prefWidth="140.0" text="To" />
+                        <TableColumn fx:id="colDateB" prefWidth="100.0" text="Date" />
+                        <TableColumn fx:id="colSeat" prefWidth="80.0" text="Seat" />
+                        <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
                     </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
 
                 </TableView>
+            <Pane layoutX="20.0" layoutY="51.0" prefHeight="257.0" prefWidth="266.0" style="-fx-border-color: #000; -fx-border-radius: 10;">
+               <children>
+      
+                      <Label layoutX="21.0" layoutY="50.0" text="Bus Name" />
+                      <TextField fx:id="txtBusName" layoutX="21.0" layoutY="76.0" prefWidth="180.0" />
+      
+                      <Label layoutX="18.0" layoutY="121.0" text="Seats" />
+                      <TextField fx:id="txtTotalSeats" layoutX="21.0" layoutY="145.0" prefHeight="24.0" prefWidth="180.0" />
+      
+                      <Button layoutX="21.0" layoutY="195.0" onAction="#addBus" text="Add Bus" />
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="21.0" prefWidth="266.0" text="Add Bus">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="327.0" layoutY="51.0" prefHeight="257.0" prefWidth="694.0" style="-fx-border-color: #000; -fx-border-radius: 10;">
+               <children>
+      
+                            <Label layoutX="48.0" layoutY="50.0" text="Origin" />
+      
+                            <Label layoutX="240.0" layoutY="50.0" text="Destination" />
+                      <ComboBox fx:id="cmbOrigin" layoutX="48.0" layoutY="77.0" prefWidth="150.0" />
+                      <ComboBox fx:id="cmbDestination" layoutX="240.0" layoutY="77.0" prefHeight="24.0" prefWidth="150.0" />
+      
+                            <Label layoutX="439.0" layoutY="50.0" text="Bus" />
+                      <ComboBox fx:id="cmbBus" layoutX="436.0" layoutY="77.0" prefHeight="24.0" prefWidth="150.0" />
+      
+                      <DatePicker fx:id="dateDeparture" layoutX="48.0" layoutY="142.0" prefHeight="24.0" prefWidth="150.0" />
+                      <TextField fx:id="txtTime" layoutX="240.0" layoutY="142.0" prefHeight="24.0" prefWidth="150.0" promptText="Time" />
+                      <TextField fx:id="txtPrice" layoutX="436.0" layoutY="142.0" prefHeight="24.0" prefWidth="150.0" promptText="Price" />
+      
+                      <Label layoutX="259.0" layoutY="12.0" text="Trip Details">
+                          <font>
+                              <Font name="System Bold" size="16.0" />
+                          </font>
+                      </Label>
+      
+                      <Button layoutX="48.0" layoutY="195.0" onAction="#addTrip" prefHeight="24.0" prefWidth="150.0" text="Add Trip" />
+                      <Button layoutX="240.0" layoutY="195.0" onAction="#updateTrip" prefHeight="24.0" prefWidth="150.0" text="Update Trip" />
+                      <Button layoutX="440.0" layoutY="195.0" onAction="#deleteTrip" prefHeight="24.0" prefWidth="150.0" text="Delete Trip" />
+                  <Label layoutX="48.0" layoutY="119.0" text="Date" />
+                  <Label layoutX="242.0" layoutY="119.0" text="Time" />
+                  <Label layoutX="439.0" layoutY="119.0" text="Price" />
+               </children>
+            </Pane>
 
             </children>
         </Pane>
