@@ -1,155 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="662.0"
-            prefWidth="912.0"
-            stylesheets="@adminpanel.css"
-            xmlns="http://javafx.com/javafx/26"
+<AnchorPane prefHeight="1050.0" prefWidth="1400.0"
+            xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="selambusreservationsystem.AdminPanelController">
 
     <children>
 
-        <ImageView fitHeight="662.0"
-                   fitWidth="912.0"
-                   pickOnBounds="true"
-                   preserveRatio="false">
-
+        <ImageView fitHeight="1050.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="false">
             <image>
                 <Image url="@resources/bus.png"/>
             </image>
-
         </ImageView>
 
-        <Pane layoutX="30.0"
-              layoutY="20.0"
-              prefHeight="620.0"
-              prefWidth="850.0"
-              style="
-                -fx-background-color: rgba(255,255,255,0.85);
-                -fx-background-radius: 15;
-                -fx-border-radius: 15;
-                -fx-border-color: #2c3e50;
-              ">
+        <Pane AnchorPane.topAnchor="20.0"
+              AnchorPane.leftAnchor="20.0"
+              AnchorPane.rightAnchor="20.0"
+              AnchorPane.bottomAnchor="20.0"
+              style="-fx-background-color: rgba(255,255,255,0.88); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #2c3e50;">
 
             <children>
 
-                <!-- TITLE -->
-                <Label layoutX="260.0"
-                       layoutY="10.0"
-                       text="Selam Bus Admin Panel">
+                <Label layoutX="0" layoutY="10" prefWidth="1360" alignment="CENTER" text="Admin Panel">
                     <font>
-                        <Font name="System Bold" size="26.0"/>
+                        <Font name="System Bold" size="28.0"/>
                     </font>
                 </Label>
 
-                <!-- STATUS -->
-                <Label fx:id="lblStatus"
-                       layoutX="250.0"
-                       layoutY="45.0"
-                       textFill="green"
-                       text=""/>
+                <Label fx:id="lblStatus" layoutX="560.0" layoutY="55.0" textFill="green"/>
 
-                <!-- BUS SECTION -->
-                <Label layoutX="40.0" layoutY="90.0" text="Bus Name"/>
-                <TextField fx:id="txtBusName"
-                           layoutX="40.0"
-                           layoutY="115.0"
-                           prefWidth="180.0"/>
+                <Label layoutX="40.0" layoutY="100.0" text="Bus Name"/>
+                <TextField fx:id="txtBusName" layoutX="40.0" layoutY="125.0" prefWidth="180.0"/>
 
-                <Label layoutX="250.0" layoutY="90.0" text="Seats"/>
-                <TextField fx:id="txtTotalSeats"
-                           layoutX="250.0"
-                           layoutY="115.0"
-                           prefWidth="120.0"/>
+                <Label layoutX="240.0" layoutY="100.0" text="Seats"/>
+                <TextField fx:id="txtTotalSeats" layoutX="240.0" layoutY="125.0" prefWidth="120.0"/>
 
-                <Button fx:id="btnAddBus"
-                        layoutX="400.0"
-                        layoutY="115.0"
-                        text="Add Bus"
-                        onAction="#addBus"/>
+                <Button layoutX="390.0" layoutY="125.0" text="Add Bus" onAction="#addBus"/>
 
-                <!-- TRIP SECTION -->
+                <Label layoutX="40.0" layoutY="175.0" text="Origin"/>
+                <ComboBox fx:id="cmbOrigin" layoutX="40.0" layoutY="200.0" prefWidth="150.0"/>
 
-                <ComboBox fx:id="cmbOrigin"
-                          layoutX="40.0"
-                          layoutY="190.0"
-                          prefWidth="140.0"
-                          promptText="Origin"/>
+                <Label layoutX="210.0" layoutY="175.0" text="Destination"/>
+                <ComboBox fx:id="cmbDestination" layoutX="210.0" layoutY="200.0" prefWidth="150.0"/>
 
-                <ComboBox fx:id="cmbDestination"
-                          layoutX="200.0"
-                          layoutY="190.0"
-                          prefWidth="140.0"
-                          promptText="Destination"/>
+                <Label layoutX="380.0" layoutY="175.0" text="Bus"/>
+                <ComboBox fx:id="cmbBus" layoutX="380.0" layoutY="200.0" prefWidth="180.0"/>
 
-                <DatePicker fx:id="dateDeparture"
-                            layoutX="360.0"
-                            layoutY="190.0"
-                            prefWidth="140.0"/>
+                <Label layoutX="590.0" layoutY="175.0" text="Trip Details">
+                    <font>
+                        <Font name="System Bold" size="16.0"/>
+                    </font>
+                </Label>
 
-                <TextField fx:id="txtTime"
-                           layoutX="520.0"
-                           layoutY="190.0"
-                           prefWidth="120.0"
-                           promptText="Time"/>
+                <DatePicker fx:id="dateDeparture" layoutX="590.0" layoutY="200.0" prefWidth="140.0"/>
+                <TextField fx:id="txtTime" layoutX="750.0" layoutY="200.0" prefWidth="120.0" promptText="Time"/>
+                <TextField fx:id="txtPrice" layoutX="890.0" layoutY="200.0" prefWidth="120.0" promptText="Price"/>
 
-                <TextField fx:id="txtPrice"
-                           layoutX="660.0"
-                           layoutY="190.0"
-                           prefWidth="120.0"
-                           promptText="Price"/>
+                <Button layoutX="40.0" layoutY="260.0" text="Add Trip" onAction="#addTrip"/>
+                <Button layoutX="140.0" layoutY="260.0" text="Update Trip" onAction="#updateTrip"/>
+                <Button layoutX="260.0" layoutY="260.0" text="Delete Trip" onAction="#deleteTrip"/>
+                <Button layoutX="400.0" layoutY="260.0" text="Refresh Bookings" onAction="#refreshBookings"/>
 
-                <ComboBox fx:id="cmbBus"
-                          layoutX="40.0"
-                          layoutY="240.0"
-                          prefWidth="200.0"
-                          promptText="Select Bus"/>
-
-                <!-- ACTION BUTTONS -->
-                <Button layoutX="270.0"
-                        layoutY="240.0"
-                        text="Add"
-                        onAction="#addTrip"/>
-
-                <Button layoutX="340.0"
-                        layoutY="240.0"
-                        text="Update"
-                        onAction="#updateTrip"/>
-
-                <Button layoutX="430.0"
-                        layoutY="240.0"
-                        text="Delete"
-                        onAction="#deleteTrip"/>
-
-                <!-- TABLE -->
                 <TableView fx:id="tripTable"
-                           layoutX="40.0"
-                           layoutY="320.0"
-                           prefWidth="770.0"
-                           prefHeight="260.0">
+                           layoutX="20.0"
+                           layoutY="330.0"
+                           AnchorPane.leftAnchor="20.0"
+                           AnchorPane.rightAnchor="20.0"
+                           prefHeight="320.0">
 
                     <columns>
-                        <TableColumn fx:id="colTripId" text="ID"/>
-                        <TableColumn fx:id="colOrigin" text="From"/>
-                        <TableColumn fx:id="colDestination" text="To"/>
-                        <TableColumn fx:id="colDate" text="Date"/>
-                        <TableColumn fx:id="colTime" text="Time"/>
-                        <TableColumn fx:id="colPrice" text="Price"/>
-                        <TableColumn fx:id="colBus" text="Bus"/>
+                        <TableColumn fx:id="colTripId" text="ID" prefWidth="80"/>
+                        <TableColumn fx:id="colOrigin" text="From" prefWidth="160"/>
+                        <TableColumn fx:id="colDestination" text="To" prefWidth="160"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="160"/>
+                        <TableColumn fx:id="colTime" text="Time" prefWidth="140"/>
+                        <TableColumn fx:id="colPrice" text="Price" prefWidth="140"/>
+                        <TableColumn fx:id="colBus" text="Bus" prefWidth="160"/>
+                    </columns>
+                </TableView>
+
+                <TableView fx:id="bookingTable"
+                           layoutX="20.0"
+                           layoutY="680.0"
+                           AnchorPane.leftAnchor="20.0"
+                           AnchorPane.rightAnchor="20.0"
+                           AnchorPane.bottomAnchor="20.0"
+                           prefHeight="320.0">
+
+                    <columns>
+                        <TableColumn fx:id="colBookingId" text="ID" prefWidth="80"/>
+                        <TableColumn fx:id="colPassenger" text="Passenger" prefWidth="160"/>
+                        <TableColumn fx:id="colBusName" text="Bus" prefWidth="140"/>
+                        <TableColumn fx:id="colOriginB" text="From" prefWidth="140"/>
+                        <TableColumn fx:id="colDestinationB" text="To" prefWidth="140"/>
+                        <TableColumn fx:id="colDateB" text="Date" prefWidth="140"/>
+                        <TableColumn fx:id="colSeat" text="Seat" prefWidth="120"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
                     </columns>
 
                 </TableView>
 
             </children>
-
         </Pane>
-
     </children>
-
 </AnchorPane>

@@ -8,56 +8,41 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import java.sql.*;
 import java.time.LocalDate;
 
 public class UIController {
 
     @FXML
     private Label lblSearch;
-
     @FXML
     private DatePicker datePicker;
-
     @FXML
     private ComboBox<String> from;
-
     @FXML
     private ComboBox<String> to;
-
     @FXML
     private TableView<Trip> tripTable;
 
     @FXML
     private TableColumn<Trip, String> colOrigin;
-
     @FXML
     private TableColumn<Trip, String> colDestination;
-
     @FXML
     private TableColumn<Trip, String> colDate;
-
     @FXML
     private TableColumn<Trip, String> colTime;
-
     @FXML
     private TableColumn<Trip, Double> colPrice;
-
     @FXML
     private TableColumn<Trip, String> colBus;
-
     @FXML
     private TableColumn<Trip, Void> colAction;
 
@@ -85,20 +70,10 @@ public class UIController {
         "Lalibela"
     };
 
-    public void initialize() {
-
-        from.getItems().addAll(locations);
-        to.getItems().addAll(locations);
-
-        setupTable();
-
-        addBookButtonToTable();
-    }
+    private Trip selectedTrip;
 
     public void getDate(ActionEvent event) {
-
         LocalDate selectedDate = datePicker.getValue();
-
         if (selectedDate != null) {
             System.out.println(selectedDate);
         }
@@ -111,20 +86,18 @@ public class UIController {
         LocalDate selectedDate = datePicker.getValue();
 
         if (origin == null || destination == null || selectedDate == null) {
-
             lblSearch.setText("Fill all fields");
             return;
         }
 
         try {
 
+            String sql
+                    = "SELECT t.*, b.bus_name FROM trip t "
+                    + "JOIN bus b ON t.bus_id = b.bus_id "
+                    + "WHERE t.origin=? AND t.destination=? AND t.departure_date=?";
+
             Connection con = DatabaseConnection.getConnection();
-
-            String sql =
-                    "SELECT t.*, b.bus_name FROM trip t " +
-                    "JOIN bus b ON t.bus_id = b.bus_id " +
-                    "WHERE t.origin=? AND t.destination=? AND t.departure_date=?";
-
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, origin);
@@ -149,21 +122,52 @@ public class UIController {
             }
 
             if (list.isEmpty()) {
-
                 lblSearch.setText("No trips found");
                 tripTable.setItems(null);
-
             } else {
-
                 lblSearch.setText(list.size() + " trips found");
                 tripTable.setItems(list);
             }
 
         } catch (Exception e) {
-
             lblSearch.setText("Database error");
             e.printStackTrace();
         }
+    }
+
+    public void initialize() {
+        from.getItems().addAll(locations);
+        to.getItems().addAll(locations);
+
+        setupTable();
+
+        tripTable.setOnMouseClicked(e -> {
+            selectedTrip = tripTable.getSelectionModel().getSelectedItem();
+        });
+
+        addBookButtonToTable();
+    }
+
+    private void addBookButtonToTable() {
+
+        colAction.setCellFactory(param -> new javafx.scene.control.TableCell<>() {
+
+            private final javafx.scene.control.Button btn = new javafx.scene.control.Button("Book Seat");
+
+            {
+                btn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;");
+                btn.setOnAction(event -> {
+                    Trip trip = getTableView().getItems().get(getIndex());
+                    openSeatWindow(trip);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
     }
 
     private void setupTable() {
@@ -176,110 +180,53 @@ public class UIController {
         colBus.setCellValueFactory(new PropertyValueFactory<>("bus"));
     }
 
-    private void addBookButtonToTable() {
-
-        colAction.setCellFactory(param -> new javafx.scene.control.TableCell<>() {
-
-            private final Button btn = new Button("Book Seat");
-
-            {
-
-                btn.setStyle(
-                        "-fx-background-color: #27ae60;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-weight: bold;"
-                );
-
-                btn.setOnAction(event -> {
-
-                    Trip trip = getTableView().getItems().get(getIndex());
-
-                    openSeatWindow(trip);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-
-                super.updateItem(item, empty);
-
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(btn);
-                }
-            }
-        });
-    }
-
     @FXML
     public void openSeatWindow(Trip trip) {
 
         try {
 
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("SeatSelection.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeatSelection.fxml"));
             Parent root = loader.load();
 
             SeatSelectionController controller = loader.getController();
-
             controller.setTrip(trip);
 
-            Scene scene = new Scene(root);
-
             Stage stage = new Stage();
-
-            stage.setScene(scene);
-
-            stage.setTitle("Seat Booking");
-
-            stage.setWidth(650);
-            stage.setHeight(500);
-
-            stage.setMinWidth(650);
-            stage.setMinHeight(500);
-
-            stage.setResizable(false);
-
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seat Selection");
             stage.show();
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void openAdminPanel(ActionEvent event) {
+    public void openAdminPanel(javafx.event.ActionEvent event) {
 
         try {
 
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("AdminPanel.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminPanel.fxml"));
             Parent root = loader.load();
-
-            Scene scene = new Scene(root);
 
             Stage stage = new Stage();
 
-            stage.setScene(scene);
+            Scene scene = new Scene(root, 1300, 850);
 
             stage.setTitle("Admin Panel");
+            stage.setScene(scene);
 
-            stage.setWidth(912);
-            stage.setHeight(662);
+            stage.setMinWidth(1100);
+            stage.setMinHeight(750);
 
-            stage.setMinWidth(912);
-            stage.setMinHeight(662);
+            stage.setMaxWidth(1500);
+            stage.setMaxHeight(950);
 
-            stage.setResizable(false);
+            stage.centerOnScreen();
 
             stage.show();
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }
